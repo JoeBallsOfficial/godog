@@ -19,5 +19,3 @@ tile_set = ExtResource("1_nnsk1")
 
 [node name="player" parent="." instance=ExtResource("2_rwgxs")]
 position = Vector2(24, 13)
-
-[node name="Node2D" type="Node2D" parent="player"]
