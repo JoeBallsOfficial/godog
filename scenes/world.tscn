@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://bf0te3x7p7ksc"]
+[gd_scene load_steps=4 format=4 uid="uid://bf0te3x7p7ksc"]
 
 [ext_resource type="TileSet" uid="uid://c7edig6v5q2li" path="res://scenes/world.tres" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://64h7ikh2p722" path="res://scenes/player.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://5tc5r3eqgqu" path="res://scenes/enemy.tscn" id="3_4wyf3"]
 
 [node name="world" type="Node2D"]
 y_sort_enabled = true
@@ -20,4 +21,7 @@ tile_map_data = PackedByteArray("AAAIAAEAAgAIAAYAAAAKAAUAAgAIAAYAAAASAAEAAgAIAAY
 tile_set = ExtResource("1_nnsk1")
 
 [node name="player" parent="." instance=ExtResource("2_rwgxs")]
-position = Vector2(24, 13)
+position = Vector2(27, 83)
+
+[node name="enemy" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(194, 93)
