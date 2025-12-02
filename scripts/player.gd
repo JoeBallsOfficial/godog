@@ -1,10 +1,22 @@
 extends CharacterBody2D
 
+var enemy_inatk_range = false
+var enemy_atk_cd = true
+var hp = 100
+var player_alive = true
+
 const speed = 100
 var current_dir = "none"
 
 func _physics_process(delta):
 	player_movement(delta)
+	enemy_attack()
+	
+	if hp <= 0:
+		player_alive = false #death screen/menu
+		hp = 0
+		print("player dead")
+		self.queue_free()
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
@@ -69,5 +81,25 @@ func play_anim(movement):
 		elif movement == 0:
 			anim.play("back_idle")
 
+func player():
+	pass
 
-	
+func _on_player_hitbox_body_entered(body: Node2D):
+	if body.has_method("enemy"):
+		enemy_inatk_range = true
+
+
+func _on_player_hitbox_body_exited(body: Node2D):
+	if body.has_method("enemy"):
+		enemy_inatk_range = false
+		
+func enemy_attack():
+	if enemy_inatk_range and enemy_atk_cd:
+		hp -= 10
+		enemy_atk_cd = false
+		$attack_cd.start()
+		print(hp)
+
+
+func _on_attack_cd_timeout():
+	enemy_atk_cd = true
