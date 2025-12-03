@@ -7,6 +7,8 @@ var player = null
 var hp = 100
 var player_inatk_range = false
 
+var can_take_dmg = true
+
 func _physics_process(delta):
 	take_damage()
 	
@@ -45,8 +47,15 @@ func _on_enemy_hitbox_body_exited(body: Node2D):
 
 func take_damage():
 	if player_inatk_range and main.player_current_attack:
-		hp -= 20
-		print("slime hp", hp)
-		if hp <= 0:
-			self.queue_free()
+		if can_take_dmg:
+			hp -= 20
+			$take_dmg_cd.start()
+			can_take_dmg = false
+			print("slime hp", hp)
+			if hp <= 0:
+				self.queue_free()
 	
+
+
+func _on_take_dmg_cd_timeout() -> void:
+	can_take_dmg = true
